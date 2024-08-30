@@ -106,7 +106,7 @@ def verify_app_secret(credentials: HTTPAuthorizationCredentials = Depends(securi
     return credentials.credentials
 
 
-@app.options("/v1/chat/completions")
+@app.options("/yyds/v1/chat/completions")
 async def chat_completions_options():
     return Response(
         status_code=200,
@@ -122,12 +122,12 @@ def replace_escaped_newlines(input_string: str) -> str:
     return input_string.replace("\\n", "\n")
 
 
-@app.get("/v1/models")
+@app.get("/yyds/v1/models")
 async def list_models():
     return {"object": "list", "data": ALLOWED_MODELS}
 
 
-@app.post("/v1/chat/completions")
+@app.post("/yyds/v1/chat/completions")
 async def chat_completions(
     request: ChatRequest, app_secret: str = Depends(verify_app_secret)
 ):
@@ -213,4 +213,4 @@ async def chat_completions(
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8002)
+    uvicorn.run(app, host="0.0.0.0", port=7860)
